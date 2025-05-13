@@ -1,0 +1,42 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">Your Profile</h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-4 text-center">
+                        <h4>{{ user.username }}</h4>
+                        <p class="text-muted">Member since: {{ user.date_joined|date:"F j, Y" }}</p>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-end mb-3">
+                            <a href="{% url 'change_password' %}" class="btn btn-sm btn-outline-secondary">Change Password</a>
+                        </div>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <fieldset class="form-group mb-4">
+                                <legend class="border-bottom mb-4">Account Information</legend>
+                                {{ u_form|crispy }}
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <legend class="border-bottom mb-4">Profile Information</legend>
+                                {{ p_form|crispy }}
+                            </fieldset>
+                            <div class="form-group mt-4">
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

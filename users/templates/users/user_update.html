@@ -1,0 +1,28 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Create User{% endblock %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-md-12">
+        <a href="{% url 'user_list' %}" class="btn btn-outline-secondary">
+            &laquo; Back to User List
+        </a>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-header bg-primary text-white">
+        <h3 class="card-title mb-0">Create New User</h3>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="d-grid gap-2 mt-4">
+                <button class="btn btn-success" type="submit">Create User</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
